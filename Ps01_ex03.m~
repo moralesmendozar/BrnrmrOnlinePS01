@@ -5,7 +5,7 @@
 %close all;
 clear;
 clc;
-n = 100;
+n = 500;
 options = optimset('Display', 'off');
 xx = linspace(0,10,n);
 y_explicitEuler = ones(n,1);
@@ -27,8 +27,7 @@ ySol(t) = dsolve(ode,cond);
 
 figure(1)
 plot(xx,y_explicitEuler,'--r','Linewidth',3)
-xlabel('x')
-ylabel('y')
+
 hold on;
 plot(xx,y_implicitEuler,'-*b','Linewidth',0.01)
 plot(xx,ySol(xx),'--g','Linewidth',2)
@@ -58,8 +57,6 @@ ySol(t) = dsolve(ode,cond);
 
 figure(2)
 plot(xx,y_explicitEuler,'--r','Linewidth',3)
-xlabel('x')
-ylabel('y')
 hold on;
 plot(xx,y_implicitEuler,'-*b')
 plot(xx,ySol(xx),'--g','Linewidth',2)
@@ -97,8 +94,6 @@ ySol(t) = dsolve(ode,conds);
 
 figure(3)
 plot(xx,y_explicitEuler,'--r','Linewidth',3)
-xlabel('x')
-ylabel('y')
 hold on;
 %plot(xx,y_implicitEuler,'-*b')
 plot(xx,ySol(xx),'--g','Linewidth',2)

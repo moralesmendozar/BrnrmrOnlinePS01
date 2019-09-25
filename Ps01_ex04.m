@@ -24,6 +24,8 @@ ySol(t) = dsolve(ode,cond);
 
 figure(11)
 plot(xx,ySol(xx),'--g','Linewidth',2)
+xlabel('x')
+ylabel('y')
 hold on;
 plot(xx,yreal,'-g')
 
@@ -65,6 +67,8 @@ ySol(t) = dsolve(ode,cond);
 
 figure(12)
 plot(xx,ySol(xx),'--g','Linewidth',2)
+xlabel('x')
+ylabel('y')
 hold on;
 plot(xx,yreal,'-g')
 
@@ -105,6 +109,8 @@ ySol(t) = dsolve(ode,cond);
 
 figure(13)
 plot(xx,ySol(xx),'--g','Linewidth',2)
+xlabel('x')
+ylabel('y')
 hold on;
 plot(xx,yreal,'-g')
 

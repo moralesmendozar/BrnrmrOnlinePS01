@@ -5,7 +5,7 @@
 %close all;
 clear;
 clc;
-n = 100;
+n = 2000;
 options = optimset('Display', 'off');
 xx = linspace(0,10,n);
 y_explicitEuler = ones(n,1);

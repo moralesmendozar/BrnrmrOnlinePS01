@@ -6,7 +6,7 @@ kappa = 10;
 a = .11;
 rho = .05;
 sigma = .1;
-delta = 0.0; % try this, change so get the same rf
+delta = 0.001; % try this, change so get the same rf
 % this only needed for second model
 rho_bar = 0.02;
 
@@ -21,6 +21,7 @@ mu_eta_abs = (1-eta).^2./eta.^2*sigma^2.*eta;
 %absolute vol eta
 sigma_eta_abs = (1-eta)./eta*sigma.*eta;
 
+figure(1)
 %plot
 subplot(2,2,1)
 plot(eta,q.*ones(101,1))
@@ -53,16 +54,25 @@ theta2 = 1 - 1./eta;
 %get sigma q2 analytically. Test with numerical too?
 sigma_q2 = -(1-eta).*kappa.*(rho - rho_bar)/(1+kappa.*rho).*sigma;
 zeta2 = (1 - theta2).*(sigma + sigma_q2);
-mu_eta_abs2 = (a - iota2)./q2 - rho + theta2.^2.*(sigma + sigma_q2).^2 .* eta;
+%mu_eta_abs2 = ((a - iota2)./q2 - rho + ((1-eta)./eta).^2.*(sigma + sigma_q2).^2).*eta;
+%theta2.^2.*(sigma + sigma_q2).^2 .* eta;
+mu_eta_abs2 = ((a - iota2)./q2 - rho + theta2.^2.*(sigma + sigma_q2).^2 ).*eta;
 sigma_eta_abs2 = -theta2.*(sigma + sigma_q2).*eta;
+
+
 % this next is quite messy, but got by ito on eta so should be fine.
+%mu_q2 = -(rho - rho_bar).*(a+ 1/kappa)...
+%    ./(eta.*(rho-rho_bar) + rho_bar + 1/kappa).^2 ...
+%.*mu_eta_abs2.*eta.*kappa  + kappa^2.*(rho - rho_bar).^2 ...
+%./(kappa.*(rho.*eta + rho_bar.*(1-eta)) + 1).^2 .* sigma_eta_abs2.^2;
 mu_q2 = -(rho - rho_bar).*(a+ 1/kappa)...
     ./(eta.*(rho-rho_bar) + rho_bar + 1/kappa).^2 ...
-.*mu_eta_abs2.*eta.*kappa  + kappa^2.*(rho - rho_bar).^2 ...
+.*mu_eta_abs2  + kappa^2.*(rho - rho_bar).^2 ...
 ./(kappa.*(rho.*eta + rho_bar.*(1-eta)) + 1).^2 .* sigma_eta_abs2.^2;
 r2 = (a-iota2)./q2 + 1/kappa*log(1+kappa.*iota2) - delta + mu_q2 + ...
     sigma*sigma_q2 - zeta2.*(sigma + sigma_q2);
 
+figure(2)
 %plot
 subplot(2,2,1)
 plot(eta,q.*ones(101,1),eta,q2)
